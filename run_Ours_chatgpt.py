@@ -53,8 +53,6 @@ questions = pd.read_csv("questions.csv")
 if "gpt-4" in args.model:
     questions = questions[questions["q_id"] < 10]
 
-questions = questions[134:]
-
 def save_results():
     df = pd.DataFrame(results_list)
     df.to_csv(f"results_Ours_{args.model}_temp{args.temp}_nbinits{args.nb_inits}_maxiter{args.max_iter}.csv",index=False)

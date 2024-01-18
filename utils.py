@@ -1,7 +1,28 @@
 import openai
 import time
 import ast
-openai.api_key = "YourAPIKey"
+from vertexai.preview.generative_models import HarmCategory, HarmBlockThreshold
+
+openai.api_key = "YourAPIkey
+
+config_def = {
+        "max_output_tokens": 2048,
+        "temperature": 0.9,
+        "top_p": 1
+    }
+
+config_attacker = {
+        "max_output_tokens": 2048,
+        "temperature": 1.0,
+        "top_p": 1
+    }
+
+safety_settings={
+        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+    }
 
 def augmentation(prompt):
     try:

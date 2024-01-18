@@ -1,6 +1,5 @@
 import openai
 import time
-import random
 import pandas as pd
 from tqdm import tqdm
 
@@ -20,8 +19,7 @@ def chatgpt(prompt):
             messages=[
                 {"role": "user", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
-            ],
-            temperature = 1.0,
+            ]
         )
     
     except openai.error.OpenAIError as e:

@@ -1,12 +1,12 @@
 import vertexai
-from vertexai.preview.generative_models import GenerativeModel, Part, HarmCategory, HarmBlockThreshold
+from vertexai.preview.generative_models import GenerativeModel
 
-import openai
 import time
 import pandas as pd
 from tqdm import tqdm
 
 from utils import evaluate_by_chatgpt, get_label, augmentation
+from utils import config_def, safety_settings
 
 import argparse
 
@@ -17,19 +17,6 @@ args = parser.parse_args()
 
 vertexai.init(project="YourProject", location="YourLocation")
 chat_model = GenerativeModel("gemini-pro")
-
-config_def = {
-        "max_output_tokens": 2048,
-        "temperature": 0.9,
-        "top_p": 1
-    }
-
-safety_settings={
-        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    }
 
 def gemini(prompt, recursion_count=0):
     if recursion_count >= 5:

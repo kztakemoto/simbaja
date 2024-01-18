@@ -1,15 +1,14 @@
 import vertexai
-from vertexai.preview.generative_models import GenerativeModel, Part, HarmCategory, HarmBlockThreshold
+from vertexai.preview.generative_models import GenerativeModel
 
-import openai
 import time
 import pandas as pd
 from tqdm import tqdm
 
 from utils import evaluate_by_chatgpt, get_label, get_attacker_system_prompt_PAIR_like, extract_json
+from utils import config_def, config_attacker, safety_settings
 
 import argparse
-import slackweb
 
 #### Parameters #############
 parser = argparse.ArgumentParser()
@@ -20,25 +19,6 @@ args = parser.parse_args()
 
 vertexai.init(project="YourProject", location="YourLocation")
 chat_model = GenerativeModel("gemini-pro")
-
-config_def = {
-        "max_output_tokens": 2048,
-        "temperature": 0.9,
-        "top_p": 1
-    }
-
-config_attacker = {
-        "max_output_tokens": 2048,
-        "temperature": args.temp,
-        "top_p": 1
-    }
-
-safety_settings={
-        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    }
 
 def attacker(model, prompt, recursion_count = 0):
     if recursion_count >= 5:
@@ -87,7 +67,6 @@ response_label = {0: "No", 1: "Yes"}
 results_list = []
 for index, row in tqdm(questions.iterrows(), total=len(questions), desc="Processing", ncols=100):
     question = row['question']
-    print(question)
     
     response = gemini(question)
     if response is not None:
