@@ -3,7 +3,7 @@ import time
 import ast
 from vertexai.preview.generative_models import HarmCategory, HarmBlockThreshold
 
-openai.api_key = "YourAPIkey
+openai.api_key = "YourAPIkey"
 
 config_def = {
         "max_output_tokens": 2048,
