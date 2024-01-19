@@ -1,10 +1,10 @@
 # SimBAja
-This repository contains code used in *All in How You Ask for It: Simple Black-Box Method for Jailbreak Attacks*.
+This repository contains code used in [*All in How You Ask for It: Simple Black-Box Method for Jailbreak Attacks*](https://arxiv.org/abs/2401.09798).
 
 ## Terms of use
 MIT licensed. Happy if you cite our papers when utilizing the codes:
 
-Takemoto K (2023) All in How You Ask for It: Simple Black-Box Method for Jailbreak Attacks. arXiv:xxxxxxxx.
+Takemoto K (2024) **All in How You Ask for It: Simple Black-Box Method for Jailbreak Attacks.** arXiv:2401.09798.
 
 ## Requirements
 * Python 3.9
